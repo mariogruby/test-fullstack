@@ -21,7 +21,7 @@ Tenéis plena libertad para implementar la lógica.
 * Mostrar un apartado filtrado por (employment.key_skill) para mostrar los usuarios que tengan el mismo puesto de trabajo. Dichos usuarios, tendrán la misma información que en el feed.
 
 ## Opcional (Se valorarán)
-* Crear un por cada card para poder eliminar un usuario.
+* Crear un botón por cada card para poder eliminar un usuario.
 * Crear paginación en el feed de usuarios.
 
 Una vez finalizado, puedes enviar la url de tu repositorio a: victor@fantasticfy.com. 
