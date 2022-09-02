@@ -8,40 +8,21 @@ Tenéis plena libertad para implementar la lógica.
 
 ## Pasos a seguir
 
-* Realizar una llamada a la siguiente API: "https://dog.ceo/api/breeds/list/all" para obtener todas las razas de perros (Las key del objeto son las razas de perro. EJ: {australian: []})
-* Guardar el nombre de la raza de perro en un título "h3"
-* Realizar una llamada a la siguiente API: "https://dog.ceo/api/breed/${key}/images" para obtener todas las imágenes de cada raza (El parámetro ${key} es el nombre de la raza).
-* Mostrar solo 3 imágenes de cada perro
-* Guardar las 3 imágenes dentro de un div 
-* Guardar tanto el elemento "h3" como el div con las imágenes, en un div con una clase que contenga el nombre de la raza
+## Feed Page
 
-Estructura:
-```
-<div class="cockapoo">
-  <h3>cockapoo</h3>
-  <div>
-    <img src="https://images.dog.ceo/breeds/cockapoo/Scout.jpg" width="100" height="100" class="img-click">
-    <img src="https://images.dog.ceo/breeds/cockapoo/big-eye-ginger.JPG" width="100" height="100" class="img-click">
-    <img src="https://images.dog.ceo/breeds/cockapoo/bubbles1.jpg" width="100" height="100" class="img-click">
-  </div>
-</div>
-```
-* Guardar todos los div de razas en un div general
-* Crear un evento para que al clicar sobre una imagen, esta se muestre en una segunda columna del HTML.
+* Realizar una llamada a la siguiente API: "https://random-data-api.com/api/v2/users" en la cual tendréis que obtener 100 usuarios.
+* Una vez obtenidos deberéis crear una grid que contenga una card con: avatar, nombre completo (first_name, last_name) y su username.
+* Dicha card, deberá tener un link para mostrar la información completa del usuario en una nueva página de perfil.
+* Crear un buscador para filtrar por: Nombre completo o username.
+* Crear un select dinámico para filtrar por genéro (gender). Dicho select solo deberá contener los generos obtenidos por la API.
 
-## Estructura final
-```
-<div class="General">
-  Divs con todas las razas
-</div>
-<div class="segunda_columna">
-  Imagen dinámica
-</div>
-```
+## Profile Page
+* Mostrar toda la información del usuario
+* Mostrar un apartado filtrado por (employment.key_skill) para mostrar los usuarios que tengan el mismo puesto de trabajo. Dichos usuarios, tendrán la misma información que en el feed.
+
 ## Opcional (Se valorarán)
-* Realizar un buscador para mostrar solo la raza buscada y esconder las demás.
-* Codificar un botón para reordenar alfabéticamente las razas de perro.
-* Se valorará el ejecutar pruebas unitarias.
+* Crear un por cada card para poder eliminar un usuario.
+* Crear paginación en el feed de usuarios.
 
 Una vez finalizado, puedes enviar la url de tu repositorio a: victor@fantasticfy.com. 
 
