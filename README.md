@@ -10,7 +10,7 @@ Tenéis plena libertad para implementar la lógica.
 
 ## Feed Page
 
-* Realizar una llamada a la siguiente API: "https://random-data-api.com/api/v2/users" en la cual tendréis que obtener 100 usuarios.
+* Realizar una llamada a la siguiente API: "https://random-data-api.com/api/v2/users" en la cual tendréis que obtener 100 usuarios (A través del parámetro size).
 * Una vez obtenidos deberéis crear una grid que contenga una card con: avatar, nombre completo (first_name, last_name) y su username.
 * Dicha card, deberá tener un link para mostrar la información completa del usuario en una nueva página de perfil.
 * Crear un buscador para filtrar por: Nombre completo o username.
