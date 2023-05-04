@@ -1,28 +1,57 @@
-# Test Full Stack <> Fantasticfy
-Prueba técnica para el puesto de Full stack JR
+# Test Full Stack Junior Dev <> Fantasticfy
+Prueba técnica para el puesto de Full stack Junior Developer
 
 ## Requisitos
-Para realizar dicha prueba podréis utilizar JS, Node.js o React. Otros lenguajes no serán aceptados.
+Para realizar dicha prueba podréis utilizar JS o React para el Front y Node.js para el Back. Otros lenguajes no serán aceptados.
 
 Tenéis plena libertad para implementar la lógica.
 
 ## Pasos a seguir
 
-## Feed Page
+## Backend:
+Montar un servidor en Node.js para realizar llamadas a la siguiente API: https://test-fullstack.myshopify.com/admin/api/2023-04/products.json. En los headers, configurar el siguiente Token:
+* X-Shopify-Access-Token: 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
+* Content-Type: application/json
 
-* Realizar una llamada a la siguiente API: "https://random-data-api.com/api/v2/users" en la cual tendréis que obtener 100 usuarios (A través del parámetro size).
-* Una vez obtenidos deberéis crear una grid que contenga una card con: avatar, nombre completo (first_name, last_name) y su username.
-* Dicha card, deberá tener un link para mostrar la información completa del usuario en una nueva página de perfil.
-* Crear un buscador para filtrar por: Nombre completo o username.
-* Crear un select dinámico para filtrar por genéro (gender). Dicho select solo deberá contener los generos obtenidos por la API.
+Con está llamada, recibiréis un array object con un listado de productos. Dichos productos tiene que recibirlos el front.
 
-## Profile Page
-* Mostrar toda la información del usuario
-* Mostrar un apartado filtrado por (employment.key_skill) para mostrar los usuarios que tengan el mismo puesto de trabajo. Dichos usuarios, tendrán la misma información que en el feed.
+## Front:
 
-## Opcional (Se valorarán)
-* Crear un botón por cada card para poder eliminar un usuario.
-* Crear paginación en el feed de usuarios.
+### Collection Page:
+
+* Realizar una llamada al servidor creado en Node.js para obtener el listado de productos
+* Una vez obtenidos, crear una grid de productos con los siguientes componenetes dinámicos:
+    * Card: El componente card tiene que ser capaz de pintar una Card con:
+        * La imagen principal del producto: {key: image}. Accediendo a está key, tendréis todo lo necesario para mostrar la imagen.
+        * Título del producto. {key: title}.
+        * Precio: {key: variants}. Obtener el precio más bajo para mostrarlo en la card.
+        * Enlace: El enlace se tendrá que configurar una ruta personalizada para poder pintar la product page.
+
+### Product Page:
+
+Obtener los datos del producto clicado y montar los siguientes componentes:
+
+* Carousel de imágenes: Recorrer todas las imágenes del producto y crear un carrousel.
+* Mostrar toda la información del producto: (Os dejamos las key que necesitáis):
+    * title.
+    * body_html.
+    * Precio: Primero posición de la array variants.price.
+* Selector dinámico para las variantes: Pintar las opciones de la variante: {key: options} y pintar el {name y values}. Cada vez que se seleccione una opción, cambiar el precio dinámicamente. El precio lo encontramos en la array de variants, en la key: {option1}
+
+
+En el objeto que obtenéis, tendréis dos arrays: options y variants. Crear un selector de options para cambiar dinámicamente el precio del producto. El precio lo encontraréis en la array de variants filtrando por la key: option.
+
+## Extra:
+El producto con el siguiente ID: 8242953519382 tiene diferentes imágenes por cada variante que tiene. Ampliar la lógica del selector para que una vez que se seleccione una variante, se cambie el carousel con su imagen.
+
+Pista: Cada item del array object de variants tiene un image_id, el cual hace referencia al id de cada item del array object de images.
+
+## Se valorará:
+* Diseño responsive de ambas páginas.
+* Diseño claro e intuitivo.
+* Deploy en la nube para ver la prueba en producción.
+
+Si tenéis cualquier duda, podéis escribir al email: a.gomez@fantasticfy.com poniendo en copia a victor@fantasticfy y os ayudaremos.
 
 Una vez finalizado, puedes enviar la url de tu repositorio a: victor@fantasticfy.com. 
 
