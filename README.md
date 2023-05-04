@@ -36,10 +36,7 @@ Obtener los datos del producto clicado y montar los siguientes componentes:
     * title.
     * body_html.
     * Precio: Primero posición de la array variants.price.
-* Selector dinámico para las variantes: Pintar las opciones de la variante: {key: options} y pintar el {name y values}. Cada vez que se seleccione una opción, cambiar el precio dinámicamente. El precio lo encontramos en la array de variants, en la key: {option1}
-
-
-En el objeto que obtenéis, tendréis dos arrays: options y variants. Crear un selector de options para cambiar dinámicamente el precio del producto. El precio lo encontraréis en la array de variants filtrando por la key: option.
+    * Selector dinámico para las variantes: Pintar las opciones de la variante: {key: options} y pintar el {name y values}. Cada vez que se seleccione una opción, cambiar el precio dinámicamente. El precio lo encontramos en la array de variants, deberéis filtrar por: {option1} y obtener su key: {price}.
 
 ## Extra:
 El producto con el siguiente ID: 8242953519382 tiene diferentes imágenes por cada variante que tiene. Ampliar la lógica del selector para que una vez que se seleccione una variante, se cambie el carousel con su imagen.
