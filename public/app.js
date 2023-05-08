@@ -15,7 +15,6 @@ function renderProductCard(product) {
   const image = document.createElement("img");
   image.src = product.image.src;
   image.alt = product.title;
-  console.log (image)
   
   const title = document.createElement("h2");
   title.textContent = product.title;
@@ -24,12 +23,10 @@ function renderProductCard(product) {
   price.textContent = `$${product.variants[0].price}`;
 
   const button = document.createElement("button");
-  button.textContent = "Ver Producto";
+  button.textContent = "Details";
   button.addEventListener("click", () => {
     renderProductDetails(product.id);
     window.location.href = `/product-details.html?id=${product.id}`
-  
-    console.log(product);
   });
 
   const cardContent = document.createElement("div");
@@ -38,30 +35,30 @@ function renderProductCard(product) {
   cardContent.appendChild(title);
   cardContent.appendChild(price);
   cardContent.appendChild(button);
-  
+
   card.appendChild(cardContent);
 
   // ADD CARD CONTAINER INTO DOM
   productGrid.appendChild(card);
 }
 
-
 // Render Products details 
 async function renderProductDetails(productId) {
   const response = await axios.get(apiUrl + "/" + productId);
 
-// carousel variants 
+  // carousel variants 
   const carousel = document.createElement("div");
   carousel.classList.add("carousel");
 
   const images = response.data.images;
   let currentImageIndex = 0;
   const currentImage = document.createElement("img");
+  currentImage.id = "current-image";
   currentImage.src = images[currentImageIndex].src;
   carousel.appendChild(currentImage);
 
   const prevButton = document.createElement("button");
-  prevButton.innerText = "Anterior";
+  prevButton.innerText = "←";
   prevButton.addEventListener("click", () => {
     currentImageIndex--;
     if (currentImageIndex < 0) {
@@ -72,7 +69,7 @@ async function renderProductDetails(productId) {
   carousel.appendChild(prevButton);
 
   const nextButton = document.createElement("button");
-  nextButton.innerText = "Siguiente";
+  nextButton.innerText = "→";
   nextButton.addEventListener("click", () => {
     currentImageIndex++;
     if (currentImageIndex >= images.length) {
@@ -82,7 +79,7 @@ async function renderProductDetails(productId) {
   });
   carousel.appendChild(nextButton);
 
-//HTML DETAILS ELEMENT
+  //HTML DETAILS ELEMENT
   const title = document.createElement("h2");
   title.textContent = response.data.title;
   productDetails.appendChild(title);
@@ -93,7 +90,6 @@ async function renderProductDetails(productId) {
 
   const price = document.createElement("p");
   price.textContent = `Price: $${response.data.variants[0].price}`;
-  console.log(price);
   productDetails.appendChild(price);
 
   const variants = response.data.options[0];
@@ -102,23 +98,22 @@ async function renderProductDetails(productId) {
   variants.values.forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
-
-    option.textContent = `${value}`
-    // const variantPrice = response.data.variants.find(variant => variant.title === value).price;
-    console.log(value)
+    option.textContent = `${value}`;
     variantSelect.appendChild(option);
   });
 
-  // event change variant - price 
+  // event change variant - price and image
   variantSelect.addEventListener("change", (event) => {
     const selectedVariant = response.data.variants.find(variant => variant.option1 === event.target.value);
+    const selectedImageId = selectedVariant.image_id;
+    const selectedImage = response.data.images.find(image => image.id === selectedImageId);
+    const currentImage = document.getElementById("current-image");
+    currentImage.src = selectedImage.src;
     price.textContent = `Price: $${selectedVariant.price}`;
-
   });
+
   productDetails.appendChild(variantSelect);
   productDetails.appendChild(carousel);
-
-
 }
 
 async function fetchProducts() {
