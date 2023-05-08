@@ -5,10 +5,21 @@ const productGrid = document.getElementById("product-grid");
 
 // DOM id  create product-details
 const productDetails = document.getElementById("product-details");
-
-// initial render card with products
+const loading = document.getElementById("loading");
 function renderProductCard(product) {
-  // HTML CARD elements
+  loading.style.display = "block"; // show"loading..."
+  axios(apiUrl)
+    .then(products => {
+      products.forEach(product => {
+        renderProductCard(product);
+      });
+      loading.style.display = "none"; // hide "loading..."
+    })
+    .catch(error => {
+      console.error(error);
+      loading.style.display = "none"; // hide "loading..."
+    });
+
   const card = document.createElement("div");
   card.classList.add("product-card");
 
@@ -41,6 +52,7 @@ function renderProductCard(product) {
   // ADD CARD CONTAINER INTO DOM
   productGrid.appendChild(card);
 }
+axios()
 
 // Render Products details 
 async function renderProductDetails(productId) {
