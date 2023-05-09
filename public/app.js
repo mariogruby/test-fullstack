@@ -1,5 +1,6 @@
 const apiUrl = "http://localhost:3000/products"; 
 
+
 //DOM id create grid product-cards
 const productGrid = document.getElementById("product-grid");
 
