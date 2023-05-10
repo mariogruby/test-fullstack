@@ -6,6 +6,8 @@ const productGrid = document.getElementById("product-grid");
 
 // DOM id  create product-details
 const productDetails = document.getElementById("product-details");
+
+
 const loading = document.getElementById("loading");
 function renderProductCard(product) {
   loading.style.display = "block"; // show"loading..."
@@ -64,33 +66,19 @@ async function renderProductDetails(productId) {
   carousel.classList.add("carousel");
 
   const images = response.data.images;
-  let currentImageIndex = 0;
-  const currentImage = document.createElement("img");
-  currentImage.id = "current-image";
-  currentImage.src = images[currentImageIndex].src;
-  carousel.appendChild(currentImage);
+  // let currentImageIndex = 0;
+  const slickCarousel = document.createElement("div");
+  slickCarousel.classList.add("slick-carousel");
 
-  const prevButton = document.createElement("button");
-  prevButton.innerText = "←";
-  prevButton.addEventListener("click", () => {
-    currentImageIndex--;
-    if (currentImageIndex < 0) {
-      currentImageIndex = images.length - 1;
-    }
-    currentImage.src = images[currentImageIndex].src;
+  images.forEach((image) => {
+    const carouselImage = document.createElement("div");
+    carouselImage.innerHTML = `<img src="${image.src}" />`;
+    slickCarousel.appendChild(carouselImage);
   });
-  carousel.appendChild(prevButton);
 
-  const nextButton = document.createElement("button");
-  nextButton.innerText = "→";
-  nextButton.addEventListener("click", () => {
-    currentImageIndex++;
-    if (currentImageIndex >= images.length) {
-      currentImageIndex = 0;
-    }
-    currentImage.src = images[currentImageIndex].src;
-  });
-  carousel.appendChild(nextButton);
+  carousel.appendChild(slickCarousel);
+
+
 
   //HTML DETAILS ELEMENT
   const title = document.createElement("h2");
@@ -120,13 +108,20 @@ async function renderProductDetails(productId) {
     const selectedVariant = response.data.variants.find(variant => variant.option1 === event.target.value);
     const selectedImageId = selectedVariant.image_id;
     const selectedImage = response.data.images.find(image => image.id === selectedImageId);
-    const currentImage = document.getElementById("current-image");
-    currentImage.src = selectedImage.src;
+    const selectedImageIndex = images.findIndex(image => image.id === selectedImageId);
+    $(".slick-carousel").slick("slickGoTo", selectedImageIndex);
     price.textContent = `Price: $${selectedVariant.price}`;
   });
 
   productDetails.appendChild(variantSelect);
   productDetails.appendChild(carousel);
+  $(".slick-carousel").slick({
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    prevArrow: '<button type="button" class="slick-prev">←</button>',
+    nextArrow: '<button type="button" class="slick-next">→</button>',
+  });
 }
 
 async function fetchProducts() {

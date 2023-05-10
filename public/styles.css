@@ -139,9 +139,9 @@
 
 }
 
-.carousel button {
+.carousel .slick-prev,
+.carousel .slick-next {
   width: 100px;
-  margin-left: 350px;
   margin-top: 20px;
   padding: 10px 20px;
   border: none;
@@ -152,14 +152,24 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   font-size: 40px;
-
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.carousel button:hover {
+.carousel .slick-prev {
+  left: 0;
+}
+
+.carousel .slick-next {
+  right: 0;
+}
+
+.carousel .slick-prev:hover,
+.carousel .slick-next:hover {
   background-color: #fff;
   color: #1f2937;
   border: 2px solid #1f2937;
-
 }
 
 .carousel img {
@@ -171,9 +181,15 @@
   margin: 0 auto;
   border-radius: 15px;
   margin-top: 20px;
-
   scroll-snap-align: center;
+  position: relative;
 }
+
+.slick-prev:before,
+.slick-next:before {
+  display: none;
+}
+
 
 .back-button {
   margin-top: 20px;
