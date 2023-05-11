@@ -107,7 +107,7 @@ async function renderProductDetails(productId) {
   variantSelect.addEventListener("change", (event) => {
     const selectedVariant = response.data.variants.find(variant => variant.option1 === event.target.value);
     const selectedImageId = selectedVariant.image_id;
-    const selectedImage = response.data.images.find(image => image.id === selectedImageId);
+    // const selectedImage = response.data.images.find(image => image.id === selectedImageId);
     const selectedImageIndex = images.findIndex(image => image.id === selectedImageId);
     $(".slick-carousel").slick("slickGoTo", selectedImageIndex);
     price.textContent = `Price: $${selectedVariant.price}`;
