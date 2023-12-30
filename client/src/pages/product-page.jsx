@@ -5,14 +5,14 @@ import { useParams } from 'react-router-dom';
 const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(null);
+  const [sliderIndex, setSliderIndex] = useState(0); // Estado para controlar el índice del carrusel
   const { id } = useParams();
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/products/${id}`); // Ruta de tu backend para obtener el producto
+        const response = await axios.get(`http://localhost:5005/products/${id}`);
         setProduct(response.data);
-        // Asignar la primera variante como seleccionada por defecto
         setSelectedVariant(response.data.variants[0]);
       } catch (error) {
         console.error('Error fetching product:', error);
@@ -22,47 +22,56 @@ const ProductPage = () => {
     fetchProduct();
   }, [id]);
 
-  const handleVariantChange = (selectedOption) => {
-    // Encontrar la variante correspondiente a la opción seleccionada
-    const foundVariant = product.variants.find((variant) =>
-      variant.selectedOptions.every(
-        (option) =>
-          option.name !== selectedOption.name ||
-          option.value === selectedOption.value
-      )
+  const handleVariantChange = (event) => {
+    const value = event.target.value;
+    const selectedVariant = product.variants.find(
+      (variant) => variant.option1 === value
     );
-    setSelectedVariant(foundVariant);
+    setSelectedVariant(selectedVariant);
+    const selectedImageIndex = product.images.findIndex(
+      (image) => image.id === selectedVariant.image_id
+    );
+    setSliderIndex(selectedImageIndex); // Actualiza el índice del carrusel al cambiar la variante
   };
 
   return (
-    <div>
-      {product ? (
-        <div>
+    <div className="product-details">
+      {product && (
+        <>
+          <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
+            <div className="carousel-inner">
+              {product.images.map((image, index) => (
+                <div className={`carousel-item ${index === sliderIndex ? 'active' : ''}`} key={index}>
+                  <img
+                    src={image.src}
+                    className="d-block w-100"
+                    alt={`Product ${index}`}
+                    style={{ maxWidth: '200px', maxHeight: '100px' }}
+                  />
+                </div>
+              ))}
+            </div>
+            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </div>
+
           <h2>{product.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: product.body_html }} />
-
-          <h3>Precio: {selectedVariant.price}</h3>
-
-          <select onChange={(e) => handleVariantChange(e.target.value)}>
-            {product.options.map((option) => (
-              <optgroup key={option.name} label={option.name}>
-                {option.values.map((value) => (
-                  <option key={value} value={{ name: option.name, value }}>
-                    {value}
-                  </option>
-                ))}
-              </optgroup>
+          <h4 dangerouslySetInnerHTML={{ __html: product.body_html }} />
+          <p>Price: ${selectedVariant?.price}</p>
+          <select onChange={handleVariantChange}>
+            {product.options[0]?.values.map((value, index) => (
+              <option key={index} value={value}>
+                {value}
+              </option>
             ))}
           </select>
-
-          <div>
-            {product.images.map((image) => (
-              <img key={image.id} src={image.src} alt={image.alt} style={{ maxWidth: '200px', maxHeight: '200px' }}/>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <p>Cargando...</p>
+        </>
       )}
     </div>
   );
