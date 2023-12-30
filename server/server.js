@@ -24,13 +24,14 @@ app.get('/products', async (req, res) => {
         })
 
         res.json(response.data.products);
+        // console.log(response.data.products);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
 
-app.get('products/:id', async (req, res) => {
+app.get('/products/:id', async (req, res) => {
     const id = req.params.id;
     try {
         const response = await axios.get(`https://test-fullstack.myshopify.com/admin/api/2023-04/products/${id}.json`, {
@@ -41,6 +42,7 @@ app.get('products/:id', async (req, res) => {
             }
         })
         res.json(response.data.product);
+        console.log(response.data.product);
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: 'Internal server error' });
