@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-const ProductPage = ({ productId }) => {
+const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [selectedVariant, setSelectedVariant] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`/products/${productId}`); // Ruta de tu backend para obtener el producto
+        const response = await axios.get(`http://localhost:5005/products/${id}`); // Ruta de tu backend para obtener el producto
         setProduct(response.data);
         // Asignar la primera variante como seleccionada por defecto
         setSelectedVariant(response.data.variants[0]);
@@ -18,7 +20,7 @@ const ProductPage = ({ productId }) => {
     };
 
     fetchProduct();
-  }, [productId]);
+  }, [id]);
 
   const handleVariantChange = (selectedOption) => {
     // Encontrar la variante correspondiente a la opción seleccionada
@@ -55,7 +57,7 @@ const ProductPage = ({ productId }) => {
 
           <div>
             {product.images.map((image) => (
-              <img key={image.id} src={image.src} alt={image.alt} />
+              <img key={image.id} src={image.src} alt={image.alt} style={{ maxWidth: '200px', maxHeight: '200px' }}/>
             ))}
           </div>
         </div>

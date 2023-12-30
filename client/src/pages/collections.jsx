@@ -13,7 +13,6 @@ const getLowestPrice = (variants) => {
     return lowestPrice !== Infinity ? lowestPrice : 'No disponible';
 };
 
-
 const CollectionPage = () => {
     const [products, setProducts] = useState([]);
 
