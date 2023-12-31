@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 const ApiService = {
+
+    //llamada a todos los productos
     fetchProducts: async () => {
         try {
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products`);
@@ -10,7 +12,7 @@ const ApiService = {
         }
     },
 
-    // Agrega otras llamadas a la API aquí según sea necesario
+    // llamada a el producto por  el id 
     fetchProductById: async (id) => {
         try {
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/${id}`);

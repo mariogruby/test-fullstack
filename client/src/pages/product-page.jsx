@@ -12,9 +12,9 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await ApiService.fetchProductById(id);
-        setProduct(response.data);
-        setSelectedVariant(response.data.variants[0]);
+        const productData = await ApiService.fetchProductById(id)
+        setProduct(productData);
+        setSelectedVariant(productData.variants[0]);
       } catch (error) {
         console.error('Error fetching product:', error);
       }

@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import ApiService from '../services/api.service'
 
 // Función para obtener el precio más bajo de los variantes del producto
-const getLowestPrice = (variants) => {
-    let lowestPrice = Infinity;
-    variants.forEach((variant) => {
-        if (variant.price < lowestPrice) {
-            lowestPrice = variant.price;
-        }
-    });
-    return lowestPrice !== Infinity ? lowestPrice : 'No disponible';
-};
+// const getLowestPrice = (variants) => {
+//     let lowestPrice = Infinity;
+//     variants.forEach((variant) => {
+//         if (variant.price < lowestPrice) {
+//             lowestPrice = variant.price;
+//         }
+//     });
+//     return lowestPrice !== Infinity ? lowestPrice : 'No disponible';
+// };
 
 const CollectionPage = () => {
     const [products, setProducts] = useState([]);
@@ -43,7 +43,7 @@ const CollectionPage = () => {
                                 <div>No hay imagen disponible</div>
                             )}
                             <h3>{product.title}</h3>
-                            <p>Precio: {getLowestPrice(product.variants)}</p>
+                            <p>Precio: {`$${product.variants[0].price}`}</p>
                             <Link to={`/products/${product.id}`}>Ver Detalles</Link>
                         </div>
                     </div>
