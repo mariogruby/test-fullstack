@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import ApiService from '../services/api.service'
 
 // Función para obtener el precio más bajo de los variantes del producto
 const getLowestPrice = (variants) => {
@@ -17,18 +18,17 @@ const CollectionPage = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        // Realizar la llamada al servidor para obtener el listado de productos
         const fetchProducts = async () => {
-            try {
-                const response = await axios.get('http://localhost:5005/products'); // Cambia la URL si es diferente
-                setProducts(response.data); // Establecer el listado de productos en el estado
-            } catch (error) {
-                console.error('Error fetching products:', error);
-            }
+          try {
+            const productsData = await ApiService.fetchProducts();
+            setProducts(productsData);
+          } catch (error) {
+            console.error(error);
+          }
         };
-
+    
         fetchProducts();
-    }, []);
+      }, []);
 
     return (
         <div className="container">

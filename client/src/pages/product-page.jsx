@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import ApiService from '../services/api.service'
 
 const ProductPage = () => {
   const [product, setProduct] = useState(null);
@@ -11,7 +12,7 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/products/${id}`);
+        const response = await ApiService.fetchProductById(id);
         setProduct(response.data);
         setSelectedVariant(response.data.variants[0]);
       } catch (error) {
