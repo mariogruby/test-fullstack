@@ -49,7 +49,7 @@ router.post("/signup", (req, res, next) => {
         .then((createdUser) => {
 
             const { email, name, _id } = createdUser
-            res.status(201).json({ user: user });
+            res.status(201).json({ email, name, _id});
         })
         .catch((err) => next(err));
 });
