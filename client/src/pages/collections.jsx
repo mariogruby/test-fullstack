@@ -36,8 +36,9 @@ const CollectionPage = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <Navbar handleSearch={handleSearch} />
+      <div className="container">
       <h1>Productos</h1>
       <div className="row">
         {filteredProducts.map((product) => (
@@ -60,6 +61,7 @@ const CollectionPage = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

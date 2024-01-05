@@ -3,9 +3,9 @@
 ## Front-end
 
 * Grid de productos (hecho)
-* Navbar interactivo (hecho)
+* Navbar interactivo (hecho, falta diseño)
 * Diseño de cards
-*signup and login 
+* signup and login 
 * Diseño de pagina web UX/UI
 * Footer
 * Formulario de registro
