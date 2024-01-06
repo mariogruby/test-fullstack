@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import ApiService from '../services/api.service'
+import ApiService from '../../services/api.service'
 
 const ProductPage = () => {
   const [product, setProduct] = useState(null);

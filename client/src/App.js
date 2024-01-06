@@ -1,16 +1,20 @@
 import React from 'react';
 import logo from './logo.svg';
-import CollectionPage from './pages/collections';
+import CollectionPage from './pages/collectionsPage/collections';
 import './App.css';
-import ProductPage from './pages/product-page';
+import ProductPage from './pages/productPage/product-page';
+import SignupPage from './pages/signupPage/signup';
+import LoginPage from './pages/loginPage/login';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
     <Routes>
-      <Route path='/'element={<CollectionPage/>} />
-      <Route path='/products/:id'element={<ProductPage/>} />
+      <Route path='/signup'element={<SignupPage/>}/>
+      <Route path='/login'element={<LoginPage/>}/>
+      <Route path='/'element={<CollectionPage/>}/>
+      <Route path='/products/:id'element={<ProductPage/>}/>
     </Routes>
     </div>
   );

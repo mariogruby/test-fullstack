@@ -1,32 +1,69 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import authService from '../services/auth.service'
+import React, { useState, useEffect } from 'react';
+import authService from '../services/auth.service';
 
-const AuthContext = createContext();
+const AuthContext = React.createContext();
 
-export const AuthProvider = ({children}) => {
+function AuthProvider(props)  {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const storeToken = (token) => {
+        localStorage.setItem("authToken", token);
+    };
+    const authenticateUser = () => {
+        const storedToken = localStorage.getItem("authToken");
+
+        if (storedToken) {
+
+            authService
+            .verify()
+            .then((response) => {
+
+                const user = response.data;
+                setIsLoggedIn(true);
+                setIsLoading(false);
+                setUser(user);
+            })
+            .catch((error) => {
+                setIsLoggedIn(false);
+                setIsLoading(false);
+                setUser(null);
+            });
+        } else {
+            setIsLoggedIn(false);
+            setIsLoading(false);
+            setUser(null);
+        }
+    };
+
+    const removeToken = () => {
+        localStorage.removeItem("authToken");
+    };
+
+    const logOutUser = () => {
+        removeToken();
+        authenticateUser();
+    };
 
     useEffect(() => {
-        const verifyToken = async () => {
-            try {
-                const response = await authService.verify();
-                setUser(response.data);
-            } catch (error){
-                setUser(null)
-            }
-            setLoading(false);
-        };
-        verifyToken();
+        authenticateUser();
     }, []);
 
     return (
-        <AuthContext.Provider  value={{user, setUser, loading}}>
-            {children}
-        </AuthContext.Provider>
+        <AuthContext.Provider
+        value={{
+        isLoggedIn,
+        isLoading,
+        user,
+        setUser,
+        storeToken,
+        authenticateUser,
+        logOutUser,
+        }}
+    >
+        {props.children}
+    </AuthContext.Provider>
     );
-};
-
-export const useAuth = () => {
-    return useContext(AuthContext)
-};
+}
+export { AuthProvider, AuthContext };

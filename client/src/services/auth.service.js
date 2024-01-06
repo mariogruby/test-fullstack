@@ -11,7 +11,8 @@ class AuthService {
         const storedToken = localStorage.getItem("authToken")
 
         if (storedToken) {
-            config.headers = { Authorization: `Berear ${storedToken}` };
+            config.headers.Authorization = `Bearer ${storedToken}`;
+            console.log("Token JWT adjuntado a la solicitud:", storedToken);
         }
         return config;
       });

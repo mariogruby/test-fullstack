@@ -5,10 +5,9 @@
 * Grid de productos (hecho)
 * Navbar interactivo (hecho, falta diseño)
 * Diseño de cards
-* signup and login 
-* Diseño de pagina web UX/UI
+* signup and login (hecho)
+* Diseño de pagina web UX/UI ant-design 5.0
 * Footer
-* Formulario de registro
 * Carrito 
 * Likes
 * Diseño de pagina de product-page-jsx (detalles de producto)

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/auth.context';
+import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = ({ handleSearch }) => {
@@ -10,6 +13,13 @@ const Navbar = ({ handleSearch }) => {
     setSearchQuery(event.target.value);
     handleSearch(query);
   };
+  const { logOutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  function logOutHandler(){
+    logOutUser()
+    console.log(logOutUser, "user logged out")
+    navigate("/");
+  }
 
 //   const handleSubmit = (event) => {
 //     event.preventDefault();
@@ -19,7 +29,9 @@ const Navbar = ({ handleSearch }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
          <div class="container-fluid">
-      <Link className="navbar-brand" to="/">Mi Tienda</Link>
+      <button onClick={logOutHandler}>Log Out</button>
+      <Link to="/signup">signup</Link>
+      <Link to="/login">Login</Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>

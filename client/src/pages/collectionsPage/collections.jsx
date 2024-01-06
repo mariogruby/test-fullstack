@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ApiService from '../services/api.service';
-import Navbar from '../components/Navbar/Navbar';
+import ApiService from '../../services/api.service';
+import authService from '../../services/auth.service';
+import Navbar from '../../components/Navbar/Navbar';
 
 const CollectionPage = () => {
   const [products, setProducts] = useState([]);
@@ -34,6 +35,20 @@ const CollectionPage = () => {
       setFilteredProducts(filtered);
     }
   };
+  
+  const addToCart = async (id) => {
+    try {
+
+      await authService.verify();
+      // Llamar a la API para agregar el producto al carrito
+      const response = await ApiService.addToCart(id);
+      // Manejar la respuesta si es necesario
+      console.log(response.data); // Puedes mostrar un mensaje de éxito al usuario si lo deseas
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <>
@@ -56,6 +71,7 @@ const CollectionPage = () => {
               <h3>{product.title}</h3>
               <p>Precio: {`$${product.variants[0].price}`}</p>
               <Link to={`/products/${product.id}`}>Ver Detalles</Link>
+              <button onClick={() => addToCart(product.id)}>Agregar al Carrito</button>
             </div>
           </div>
         ))}
