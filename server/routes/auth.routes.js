@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 const jwt = require('jsonwebtoken')
 const User = require('../models/User.model');
+const Cart = require('../models/Cart.model');
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 
 const saltRounds = 10;
@@ -43,9 +44,15 @@ router.post("/signup", (req, res, next) => {
             const salt = bcrypt.genSaltSync(saltRounds);
             const hashedPassword = bcrypt.hashSync(password, salt);
 
+            const newCart = new Cart ({items: []});
+            return newCart.save()
+            .then((createdCart) => {
 
-            return User.create({ email, password: hashedPassword, name });
+                return User.create({ email, password: hashedPassword, name, cart: createdCart._id})
+            });
+
         })
+
         .then((createdUser) => {
 
             const { email, name, _id } = createdUser
