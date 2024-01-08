@@ -16,7 +16,18 @@ const userSchema = new Schema(
             type: String,
             required: [true, "Name is required."],
         },
-        cart: [{type: Schema.Types.ObjectId, ref: "CartItem"}]
+        cart: [
+            {
+                productId: {
+                    type: String, // Cambia a String si el ID es una cadena
+                    // type: Schema.Types.ObjectId, // Usar ObjectId si es un ObjectId
+                },
+                quantity: {
+                    type: Number,
+                    default: 1,
+                },
+            },
+        ],
     },
     {
         timestamps: true,
