@@ -22,14 +22,25 @@ const ApiService = {
         }
     },
 
-    addToCart: async (id) => {
+    addToCart: async (product_id, quantity) => {
         try {
-            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/add-to-cart/${id}`);
+            const token = localStorage.getItem('authToken');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            const response = await axios.post(
+                `${process.env.REACT_APP_SERVER_URL}/api/cart/add/${product_id}`,
+                { product_id, quantity },
+                config
+            );
             return response.data;
         } catch (error) {
             throw new Error('Error adding product to cart:', error);
         }
-    },
+    }
 };
 
 export default ApiService;
