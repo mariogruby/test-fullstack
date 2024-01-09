@@ -22,7 +22,7 @@ const ApiService = {
         }
     },
 
-    addToCart: async (product_id, quantity) => {
+    addToCart: async (id, title, price, quantity) => {
         try {
             const token = localStorage.getItem('authToken');
             const config = {
@@ -32,13 +32,33 @@ const ApiService = {
             };
 
             const response = await axios.post(
-                `${process.env.REACT_APP_SERVER_URL}/api/cart/add/${product_id}`,
-                { product_id, quantity },
+                `${process.env.REACT_APP_SERVER_URL}/api/cart/add/${id}`,
+                { id, quantity, title, price },
                 config
             );
             return response.data;
         } catch (error) {
             throw new Error('Error adding product to cart:', error);
+        }
+    },
+
+
+    getCartProducts: async () => {
+        try {
+            const token = localStorage.getItem('authToken');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            const response = await axios.get(
+                `${process.env.REACT_APP_SERVER_URL}/api/user/cart`, // Ruta en el backend para obtener el carrito del usuario
+                config
+            );
+            return response.data;
+        } catch (error){
+            throw new Error('Error fetching user cart:', error);
         }
     }
 };
