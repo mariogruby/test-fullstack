@@ -26,7 +26,15 @@ const userSchema = new Schema(
                     type: Number,
                     default: 1,
                 },
-            },
+                title: {
+                    type: String,
+                    // required: true,
+                },
+                price: {
+                    type: Number,
+                    //required: true,
+                },
+            }
         ],
     },
     {
