@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ApiService from '../../services/api.service';
 import authService from '../../services/auth.service';
+// import Navbar from '../../components/Navbar/Navbar';
 import Navbar from '../../components/Navbar/Navbar';
+
 
 const CollectionPage = () => {
   const [products, setProducts] = useState([]);
