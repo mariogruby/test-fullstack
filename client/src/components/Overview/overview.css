@@ -1,0 +1,27 @@
+.contenedor {
+    position: relative;
+}
+
+.texto {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-shadow: 2px 2px 10px #000000;
+    color: #fff;
+  }
+  .texto h3 {
+    font-size: 120px;
+  }
+  .texto Button{
+    text-shadow: 2px 2px 10px #000000;
+  }
+  @media screen and (max-width: 767px) {
+    .texto h3 {
+      font-size: 140px; /* Ajusta el tamaño del texto para dispositivos pequeños */
+    }
+  }
+  /* falta arreglar responsic¡ve de las imagenes */

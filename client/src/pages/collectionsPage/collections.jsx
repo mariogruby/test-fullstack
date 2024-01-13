@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import ApiService from '../../services/api.service';
 import authService from '../../services/auth.service';
 // import Navbar from '../../components/Navbar/Navbar';
-import Navbar from '../../components/Navbar/Navbar';
+import NavbarPage from '../../components/Navbar/navbar';
+import Overview from '../../components/Overview/overview';
+
 
 
 const CollectionPage = () => {
@@ -54,7 +56,8 @@ const CollectionPage = () => {
 
   return (
     <>
-      <Navbar handleSearch={handleSearch} />
+      <NavbarPage handleSearch={handleSearch} />
+      <Overview/>
       <div className="container">
         <h1>Productos</h1>
         <div className="row">
