@@ -5,6 +5,7 @@ import authService from '../../services/auth.service';
 // import Navbar from '../../components/Navbar/Navbar';
 import NavbarPage from '../../components/Navbar/navbar';
 import Overview from '../../components/Overview/overview';
+import Bindings from '../../components/Bindings/binding';
 
 
 
@@ -57,8 +58,9 @@ const CollectionPage = () => {
   return (
     <>
       <NavbarPage handleSearch={handleSearch} />
-      <Overview/>
+      {searchQuery.trim() === '' && <Overview />}
       <div className="container">
+        <Link to={'/products/bindings'}>Bindings</Link>
         <h1>Productos</h1>
         <div className="row">
           {filteredProducts.map((product) => (
