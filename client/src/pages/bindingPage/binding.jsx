@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BindingsService from '../../services/bindings.service';
-import Navbar from '../Navbar/navbar';
+import Navbar from '../../components/Navbar/navbar';
 
 const Bindings = () => {
   const [products, setProducts] = useState([]);
