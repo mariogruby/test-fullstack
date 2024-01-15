@@ -15,5 +15,7 @@ app.use("/api", apiRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
+const bindingsRoutes = require("./routes/bindings.routes");
+app.use("/bindings", bindingsRoutes);
 
 module.exports = app;
