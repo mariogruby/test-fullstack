@@ -18,4 +18,7 @@ app.use("/auth", authRoutes);
 const bindingsRoutes = require("./routes/bindings.routes");
 app.use("/bindings", bindingsRoutes);
 
+const bootsRoutes = require("./routes/boots.routes");
+app.use("/boots", bootsRoutes);
+
 module.exports = app;
