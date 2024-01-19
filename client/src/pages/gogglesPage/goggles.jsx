@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BootsService from '../../services/boots.service';
+import GogglesService from '../../services/goggles.service'
 import Navbar from '../../components/Navbar/navbar';
 
-const Boots = () => {
+const Goggles = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        const fetchBoots = async () => {
+        const fetchGoggles = async () => {
             try {
-                const productsData = await BootsService.fetchBoots();
+                const productsData = await GogglesService.fetchGoggles();
                 setProducts(productsData);
                 setFilteredProducts(productsData);
             } catch (error) {
                 console.error(error);
             }
         };
-        fetchBoots();
+        fetchGoggles();
     }, [])
 
     const handleSearch = (searchQuery) => {
@@ -37,7 +37,7 @@ const Boots = () => {
       const addToCart = async (productId, title, price) => {
         try {
           // Llamar al servicio para agregar el producto al carrito
-          await BootsService.addToCart(productId, title, price); // 1 es la cantidad por defecto (puedes ajustarlo según tus necesidades)
+          await GogglesService.addToCart(productId, title, price); // 1 es la cantidad por defecto (puedes ajustarlo según tus necesidades)
     
           // Actualizar la UI o realizar alguna acción adicional después de agregar al carrito
           // Por ejemplo, mostrar un mensaje de éxito, actualizar el estado, etc.
@@ -50,7 +50,7 @@ const Boots = () => {
       return( 
         <>
         <Navbar handleSearch={handleSearch}/>
-        <h1>boots</h1>
+        <h1>goggles</h1>
         <div className="row">
         {filteredProducts.map((product) => (
           <div key={product.id} className='col-md-4'>
@@ -66,7 +66,7 @@ const Boots = () => {
               )}
               <h3>{product.title}</h3>
               <p>Precio: {`$${product.price}`}</p>
-              <Link to={`/products/boots/${product.id}`}>Ver Detalles</Link>
+              <Link to={`/products/goggles/${product.id}`}>Ver Detalles</Link>
               <button onClick={() => addToCart(product.id, product.title, product.price)}>Agregar al Carrito</button>
             </div>
           </div>
@@ -76,4 +76,4 @@ const Boots = () => {
       );
 }
 
-export default Boots;
+export default Goggles;

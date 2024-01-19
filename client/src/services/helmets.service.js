@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-const BootsService = {
-    fetchBoots: async () => {
+const HelmetsService = {
+    fetchHelmets: async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/boots/products/boots`);
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/helmets/products/helmets`);
             return response.data 
         } catch (error) {
             throw new Error('Error fetching products:', error);
         }
     },
 
-    fetchBootById: async (productId) => {
+    fetchHelmetById: async (productId) => {
         try{
-            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/boots/products/boots/${productId}`);
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/helmets/products/helmets/${productId}`);
             return response.data;
         } catch (error){
             throw new Error('Error fetching product:', error);
@@ -28,7 +28,7 @@ const BootsService = {
                 }
             };
             const response = await axios.post(
-                `${process.env.REACT_APP_SERVER_URL}/boots/cart/add/${productId}`,
+                `${process.env.REACT_APP_SERVER_URL}/helmets/cart/add/${productId}`,
                 { productId, quantity, title, price},
                 config
             );
@@ -39,4 +39,4 @@ const BootsService = {
     },
 }
 
-export default BootsService;
+export default HelmetsService;
