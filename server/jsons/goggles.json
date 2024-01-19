@@ -1,0 +1,32 @@
+{
+    "products": [
+      {
+        "id": 1795462135,
+        "title": "Storm Slayer Goggles",
+        "price": 260.00,
+        "image": "https://res.cloudinary.com/ddg9b0qik/image/upload/v1705414611/snow-world/elmmqm2rvbkoyajtz5dz.png",
+        "description": "Esta es la descripción del Producto 1."
+      },
+      {
+        "id": 2345687595859,
+        "title": "Polar Plunge Goggles",
+        "price": 234.99,
+        "image": "https://res.cloudinary.com/ddg9b0qik/image/upload/v1705414767/snow-world/yctlcrpfehzzjrmu4oot.png",
+        "description": "Esta es la descripción del Producto 2."
+      },
+      {
+        "id": 378236456248,
+        "title": "Glacier Glare Goggles",
+        "price": 299.99,
+        "image": "https://res.cloudinary.com/ddg9b0qik/image/upload/v1705414860/snow-world/en78bkgivreffs6wbswv.png",
+        "description": "Esta es la descripción del Producto 3."
+      },
+      {
+        "id": 46523485957,
+        "title": "Frozen Focus Goggles",
+        "price": 159.99,
+        "image": "https://res.cloudinary.com/ddg9b0qik/image/upload/v1705415069/snow-world/xxpuwxxmkuv4hghnbghy.png",
+        "description": "Esta es la descripción del Producto 4."
+      }
+    ]
+  }

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const User = require('../models/User.model');
-const Json = require('../jsons/boots.json');
+const Json = require('../jsons/goggles.json');
 
 const { isAuthenticated } = require('../middleware/jwt.middleware');
 const router = express.Router();
@@ -9,7 +9,7 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.static(path.join(__dirname, 'public')));
 
-router.get('/products/boots', async (req, res,) => {
+router.get('/products/goggles', async (req, res,) => {
     try {
         res.json(Json.products);
     } catch (error) {
@@ -18,7 +18,7 @@ router.get('/products/boots', async (req, res,) => {
     }
 });
 
-router.get('/products/boots/:productId', async (req, res) => {
+router.get('/products/goggles/:productId', async (req, res) => {
     try {
         const productId = parseInt(req.params.productId);
         const product = Json.products.find(p => p.id === productId);

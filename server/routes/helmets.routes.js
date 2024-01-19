@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const User = require('../models/User.model');
-const Json = require('../jsons/boots.json');
+const Json = require('../jsons/helmets.json');
 
 const { isAuthenticated } = require('../middleware/jwt.middleware');
 const router = express.Router();
@@ -9,24 +9,23 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.static(path.join(__dirname, 'public')));
 
-router.get('/products/boots', async (req, res,) => {
+router.get('/products/helmets', async (req, res) => {
     try {
         res.json(Json.products);
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({message: "Internal Server Error"})
     }
 });
 
-router.get('/products/boots/:productId', async (req, res) => {
+router.get('/products/helmets/:productId', async (req, res) => {
     try {
         const productId = parseInt(req.params.productId);
         const product = Json.products.find(p => p.id === productId);
-        
-        if (!product) {
+
+        if(!product) {
             return res.status(404).json({ message: 'Product not found' });
         }
-
         res.json(product);
     } catch (error) {
         console.log(error);
@@ -62,4 +61,4 @@ router.post('/cart/add/:productId', isAuthenticated, async (req, res) => {
     }
 });
 
-module.exports = router; 
+module.exports = router 

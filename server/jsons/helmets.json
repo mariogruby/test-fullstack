@@ -1,0 +1,32 @@
+{
+    "products": [
+      {
+        "id": 17858957,
+        "title": "Avalanche Armor Helmet",
+        "price": 389.99,
+        "image": "https://res.cloudinary.com/ddg9b0qik/image/upload/v1705403381/snow-world/csdatajgysn8lwvo0cz2.png",
+        "description": "Esta es la descripción del Producto 1."
+      },
+      {
+        "id": 23256558,
+        "title": "Summit Shield Helmet",
+        "price": 399.99,
+        "image": "https://res.cloudinary.com/ddg9b0qik/image/upload/v1705404082/snow-world/helmet-2_flljqi.png",
+        "description": "Esta es la descripción del Producto 2."
+      },
+      {
+        "id": 378547,
+        "title": "Glacier Guardian Helmet",
+        "price": 309.99,
+        "image": "https://res.cloudinary.com/ddg9b0qik/image/upload/v1705404578/snow-world/helmet-3_trglmn.png",
+        "description": "Esta es la descripción del Producto 3."
+      },
+      {
+        "id": 45489658,
+        "title": "Artic Assault Helmet",
+        "price": 199.99,
+        "image": "https://res.cloudinary.com/ddg9b0qik/image/upload/v1705404694/snow-world/helmet-4_nq7non.png",
+        "description": "Esta es la descripción del Producto 4."
+      }
+    ]
+  }
