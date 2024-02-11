@@ -39,6 +39,7 @@ router.post('/cart/add/:productId', isAuthenticated, async (req, res) => {
     const productId = req.params.productId
     const productTitle = req.body.title;
     const productPrice = req.body.price;
+    const productImage = req.body.image;
 
     try {
         const user = await User.findById(userId);
@@ -51,7 +52,7 @@ router.post('/cart/add/:productId', isAuthenticated, async (req, res) => {
         if (existingProductIndex !== -1) {
             user.cart[existingProductIndex].quantity += 1;
         } else {
-            user.cart.push({ productId: productId, title: productTitle, price: productPrice });
+            user.cart.push({ productId: productId, title: productTitle, price: productPrice, image: productImage});
         }
 
         await user.save();
