@@ -5,8 +5,10 @@ import ApiService from '../../services/api.service';
 import ApiCollections from '../collectionsPage/api-collections';
 import authService from '../../services/auth.service';
 import SliderCollections from '../../components/Slider/slider-collections'
+import TopSection from '../../components/Top/top'
 import NavbarPage from '../../components/Navbar/navbar';
 import Overview from '../../components/Overview/overview';
+import Footer from '../../components/Footer/footer';
 import Container from 'react-bootstrap/Container';
 import ListCollections from '../../components/List/list-collections';
 import Slider from 'react-slick'; // Importa el componente Slider de react-slick
@@ -83,13 +85,12 @@ const LandingPage = () => {
 
   return (
     <>
-      <NavbarPage handleSearch={handleSearch} />
+      {/* <NavbarPage handleSearch={handleSearch} /> */}
       {searchQuery.trim() === '' && <Overview />}
-      {/* <Container> */}
         <ListCollections />
-        <h1>Productos</h1>
-        <SliderCollections/>
-      {/* </Container> */}
+        <SliderCollections />
+        <TopSection />
+        <Footer />
     </>
   );
 };

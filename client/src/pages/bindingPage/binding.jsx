@@ -36,10 +36,10 @@ const Bindings = () => {
     }
   };
 
-  const addToCart = async (productId, title, price) => {
+  const addToCart = async (productId, title, price, image) => {
     try {
       // Llamar al servicio para agregar el producto al carrito
-      await BindingsService.addToCart(productId, title, price); // 1 es la cantidad por defecto (puedes ajustarlo según tus necesidades)
+      await BindingsService.addToCart(productId, title, price, image); // 1 es la cantidad por defecto (puedes ajustarlo según tus necesidades)
 
       // Actualizar la UI o realizar alguna acción adicional después de agregar al carrito
       // Por ejemplo, mostrar un mensaje de éxito, actualizar el estado, etc.
@@ -52,7 +52,7 @@ const Bindings = () => {
 
   return (
     <>
-    <Navbar handleSearch={handleSearch}/> 
+    {/* <Navbar handleSearch={handleSearch}/>  */}
       <h1>bindings</h1>
       <div className="row">
         {filteredProducts.map((product) => (
@@ -70,7 +70,7 @@ const Bindings = () => {
               <h3>{product.title}</h3>
               <p>Precio: {`$${product.price}`}</p>
               <Link to={`/products/bindings/${product.id}`}>Ver Detalles</Link>
-              <button onClick={() => addToCart(product.id, product.title, product.price)}>Agregar al Carrito</button>
+              <button onClick={() => addToCart(product.id, product.title, product.price, product.image)}>Agregar al Carrito</button>
             </div>
           </div>
         ))}

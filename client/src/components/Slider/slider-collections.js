@@ -3,15 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ApiService from '../../services/api.service';
 // import ApiCollections from './api-collections';
-import authService from '../../services/auth.service';
-import NavbarPage from '../../components/Navbar/navbar';
-import Overview from '../../components/Overview/overview';
-import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import ListCollections from '../../components/List/list-collections';
 import Slider from 'react-slick'; // Importa el componente Slider de react-slick
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Container from 'react-bootstrap/Container'
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
 const SliderComponent = () => {
     const [products, setProducts] = useState([]);
@@ -53,15 +52,17 @@ const SliderComponent = () => {
     //       setFilteredProducts(filtered);
     //     }
     //   };
-    const PrevArrow = ({ onClick }) => <div onClick={onClick}>&lt; Anterior</div>;
-    const NextArrow = ({ onClick }) => <div onClick={onClick}>Siguiente &gt;</div>;
+    const PrevArrow = ({ onClick }) =>
+        <button type="button" className="btn btn-light custom-arrow-prev" onClick={onClick}><ArrowBackRoundedIcon className="text-dark"/></button>;
+    const NextArrow = ({ onClick }) =>
+        <button type="button" className="btn btn-light custom-arrow-next" onClick={onClick}><ArrowForwardRoundedIcon className="text-dark"/></button>;
 
     // Configuración del slider
     const sliderSettings = {
         dots: false,
         infinite: false,
         speed: 500,
-        slidesToShow: 4, // Número de productos mostrados a la vez
+        slidesToShow: 4,
         slidesToScroll: 1,
         prevArrow: <PrevArrow />,
         nextArrow: <NextArrow />,
@@ -86,39 +87,45 @@ const SliderComponent = () => {
             {/* <NavbarPage handleSearch={handleSearch} /> */}
             {/* {searchQuery.trim() === '' && <Overview />} */}
             {/* <Container> */}
-                <Slider {...sliderSettings}>
+            <div className="b-g">
+                <h1 className="title py-5">Snowboards Collections</h1>
+                <Slider className="mb-5" {...sliderSettings}>
                     {filteredProducts.map((product) => (
-                        <div key={product.id} className="product-card">
+                        <div key={product.id} className="product-card mb-3">
                             <Link to={`/products/${product.id}`}>
-                            <div className="product-image-container">
-                                {product.image ? (
-                                    <Image
-                                    rounded 
-                                        src={product.image.src}
-                                        alt={product.title}
-                                        className="product-image mt-3"
-                                    />
-                                ) : (
-                                    <div>No hay imagen disponible</div>
-                                    
-                                )}
-                                
-                            </div>
+                                <div className="product-image-container">
+                                    {product.image ? (
+                                        <Image
+                                            rounded
+                                            src={product.image.src}
+                                            alt={product.title}
+                                            className="product-image mt-3"
+                                        />
+                                    ) : (
+                                        <div>No hay imagen disponible</div>
+
+                                    )}
+
+                                </div>
                             </Link>
-                            <a href={`/products/${product.id}`} className="link-underline link-underline-opacity-0 text-dark"><h5 className="mt-3">{product.title}</h5></a>
-                            <p>Precio: {`$${product.variants[0].price}`}</p>
+                            <a href={`/products/${product.id}`}
+                                className="link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">
+                                <h5 className="mt-2 titulo">{product.title}</h5></a>
+                            <p className="text-white precio">Precio: {`$${product.variants[0].price}`}</p>
                             {/* <Link to={`/products/${product.id}`}>Ver Detalles</Link> */}
-                            <button
+                            {/* <button
                                 onClick={() =>
                                     addToCart(product.id, product.title, product.variants[0].price)
                                 }
                             >
                                 Agregar al Carrito
-                            </button>
+                            </button> */}
                         </div>
-                        
+
                     ))}
                 </Slider>
+                <a href="/products/snowboards" type="button" className="btncollection btn btn-light mt-2 mb-5">View all</a>
+            </div> 
             {/* </Container> */}
         </>
     );

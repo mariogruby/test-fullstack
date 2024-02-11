@@ -28,10 +28,10 @@ const CollectionPage = () => {
         fetchProducts();
     }, []);
 
-    const addToCart = async (productId, title, price) => {
+    const addToCart = async (productId, title, price, image) => {
         try {
             // Llamar al servicio para agregar el producto al carrito
-            await ApiService.addToCart(productId, title, price); // 1 es la cantidad por defecto (puedes ajustarlo según tus necesidades)
+            await ApiService.addToCart(productId, title, price, image); // 1 es la cantidad por defecto (puedes ajustarlo según tus necesidades)
 
             // Actualizar la UI o realizar alguna acción adicional después de agregar al carrito
             // Por ejemplo, mostrar un mensaje de éxito, actualizar el estado, etc.
@@ -78,7 +78,7 @@ const CollectionPage = () => {
                                 <h3>{product.title}</h3>
                                 <p>Precio: {`$${product.variants[0].price}`}</p>
                                 <Link to={`/products/${product.id}`}>Ver Detalles</Link>
-                                <button onClick={() => addToCart(product.id, product.title, product.variants[0].price)}>Agregar al Carrito</button>
+                                <button onClick={() => addToCart(product.id, product.title, product.variants[0].price, product.image.src)}>Agregar al Carrito</button>
                             </div>
                         </div>
                     ))}

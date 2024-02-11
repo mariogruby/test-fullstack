@@ -34,10 +34,10 @@ const Boots = () => {
         }
       };
 
-      const addToCart = async (productId, title, price) => {
+      const addToCart = async (productId, title, price, image) => {
         try {
           // Llamar al servicio para agregar el producto al carrito
-          await BootsService.addToCart(productId, title, price); // 1 es la cantidad por defecto (puedes ajustarlo según tus necesidades)
+          await BootsService.addToCart(productId, title, price, image); // 1 es la cantidad por defecto (puedes ajustarlo según tus necesidades)
     
           // Actualizar la UI o realizar alguna acción adicional después de agregar al carrito
           // Por ejemplo, mostrar un mensaje de éxito, actualizar el estado, etc.
@@ -49,7 +49,7 @@ const Boots = () => {
       }; // Agregar searchQuery como dependencia para reaccionar a cambios
       return( 
         <>
-        <Navbar handleSearch={handleSearch}/>
+        {/* <Navbar handleSearch={handleSearch}/> */}
         <h1>boots</h1>
         <div className="row">
         {filteredProducts.map((product) => (
@@ -67,7 +67,7 @@ const Boots = () => {
               <h3>{product.title}</h3>
               <p>Precio: {`$${product.price}`}</p>
               <Link to={`/products/boots/${product.id}`}>Ver Detalles</Link>
-              <button onClick={() => addToCart(product.id, product.title, product.price)}>Agregar al Carrito</button>
+              <button onClick={() => addToCart(product.id, product.title, product.price, product.image)}>Agregar al Carrito</button>
             </div>
           </div>
         ))}

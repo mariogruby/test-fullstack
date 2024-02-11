@@ -19,7 +19,7 @@ const GogglesService = {
         }
     },
 
-    addToCart: async (productId, title, price, quantity) => {
+    addToCart: async (productId, title, price, image, quantity) => {
         try {
             const token = localStorage.getItem('authToken');
             const config = {
@@ -29,7 +29,7 @@ const GogglesService = {
             };
             const response = await axios.post(
                 `${process.env.REACT_APP_SERVER_URL}/goggles/cart/add/${productId}`,
-                { productId, quantity, title, price},
+                { productId, quantity, title, price, image },
                 config
             );
             return response.data;

@@ -13,27 +13,29 @@ import Goggles from './pages/gogglesPage/goggles';
 import GogglePage from './pages/gogglesPage/goggle-page';
 import SignupPage from './pages/signupPage/signup';
 import LoginPage from './pages/loginPage/login';
-import ApiCollections from './pages/collectionsPage/api-collections'; 
+import Navbar from './components/Navbar/navbar';
+import ApiCollections from './pages/collectionsPage/api-collections';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-    <Routes>
-      <Route path='/signup'element={<SignupPage/>}/>
-      <Route path='/login'element={<LoginPage/>}/>
-      <Route path='/'element={<LandingPage/>}/>
-      <Route path='/products/snowboards'element={<ApiCollections/>}/>
-      <Route path='/products/:id'element={<ProductPage/>}/>
-      <Route path='/products/bindings'element={<Bindings/>}/>
-      <Route path='/products/bindings/:productId'element={<ProductBindingsPage/>}/>
-      <Route path='/products/boots'element={<Boots/>}/>
-      <Route path='/products/boots/:productId'element={<BootPage/>}/>
-      <Route path='/products/helmets'element={<Helmets/>}/>
-      <Route path='/products/helmets/:productId'element={<HelmetPage/>}/>
-      <Route path='/products/goggles'element={<Goggles/>}/>
-      <Route path='/products/goggles/:productId'element={<GogglePage/>}/>
-    </Routes>
+      <Navbar />
+      <Routes>
+        <Route path='/signup' element={<SignupPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/products/snowboards' element={<ApiCollections />} />
+        <Route path='/products/:id' element={<ProductPage />} />
+        <Route path='/products/bindings' element={<Bindings />} />
+        <Route path='/products/bindings/:productId' element={<ProductBindingsPage />} />
+        <Route path='/products/boots' element={<Boots />} />
+        <Route path='/products/boots/:productId' element={<BootPage />} />
+        <Route path='/products/helmets' element={<Helmets />} />
+        <Route path='/products/helmets/:productId' element={<HelmetPage />} />
+        <Route path='/products/goggles' element={<Goggles />} />
+        <Route path='/products/goggles/:productId' element={<GogglePage />} />
+      </Routes>
     </div>
   );
 }

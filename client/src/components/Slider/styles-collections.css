@@ -4,10 +4,21 @@
     justify-content: center;
   }
   
+  .b-g{
+  background:  rgb(23,115,176);
+  background: radial-gradient(circle, rgb(39, 154, 241, 1) 0%, rgba(10, 35, 66, 1) 100%);
+  overflow-x: hidden;
+  }
+  .title {
+    font-size:60px;
+    text-shadow: 2px 2px 10px #000000;
+    color:#fff
+  }
+  
   .product-image {
-    max-width: 100%;
-    width: 300px;
-    max-height: 100%;
+    /* max-width: 100%; */
+    max-width: 300px;
+    max-height: 300px;
     object-fit: contain;
     box-shadow:0 0 20px rgba(0, 0, 0, 0.4);
     overflow: hidden;
@@ -28,3 +39,42 @@
     transition: transform 0.3s ease;
     overflow: hidden;
   } */
+
+  /* .slider-container {
+    position: relative;
+} */
+
+.custom-arrow-prev {
+  z-index:1;
+  position: absolute;
+  bottom: -10%; /* Ajusta la posición vertical según sea necesario */
+  left: 49%; /* Centra horizontalmente */
+  transform: translateX(-100%); /* Ajusta para centrar correctamente */
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-shadow: 2px 2px 10px #000000;
+  color: #fff;
+}
+
+.custom-arrow-next {
+  position: absolute;
+  bottom: -10%; /* Ajusta la posición vertical según sea necesario */
+  right: 49%; /* Centra horizontalmente */
+  transform: translateX(100%); /* Ajusta para centrar correctamente */
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-shadow: 2px 2px 10px #000000;
+  color: #fff;
+}
+
+.titulo {
+  text-shadow: 2px 2px 10px #000000;
+}
+.precio {
+  text-shadow: 2px 2px 10px #000000;
+}
+.btncollection{
+  /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+  font-size:large;
+  border-radius: 50px;
+  width: 150px;
+  height: 40px;
+}
