@@ -2,44 +2,32 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
+import { useCart } from '../../context/cart.context';
 import { useNavigate } from 'react-router-dom';
-// import Nav from 'react-bootstrap/Nav'
-// import Container from 'react-bootstrap/Container';
-// import Form from 'react-bootstrap/Form';
-// import Navbar from 'react-bootstrap/Navbar';
-// import NavDropdown from 'react-bootstrap/NavDropdown';
-// import Collapse from 'react-bootstrap/Collapse';
 import './navbar.css';
-import ApiService from '../../services/api.service'
 import Cart from '../Cart/cart';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import SearchIcon from '@mui/icons-material/Search';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-const NavbarPage = ({ handleSearch }) => {
+const NavbarPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [open, setOpen] = useState(false);
+  // Esto viene del cart.context 
+  const { getCartItems } = useCart();
 
   const handleChange = (event) => {
     const query = event.target.value;
     setSearchQuery(event.target.value);
     handleSearch(query);
   };
+  // Funcion para hacer logout 
   const { logOutUser } = useContext(AuthContext);
   const navigate = useNavigate();
   function logOutHandler() {
     logOutUser()
     console.log(logOutUser, "user logged out")
     navigate("/");
-
-
   }
-
-  //   const handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     handleSearch(searchQuery);
-  //   };
 
   return (
     <nav className="navbar  sticky-top navbar-expand-lg bg-body-tertiary">
@@ -67,13 +55,8 @@ const NavbarPage = ({ handleSearch }) => {
               <li><a className="dropdown-item" onClick={logOutHandler}>Log Out</a></li>
             </ul>
           </li>
-          <Cart/>
-
-          {/* <li className="nav-item">
-            <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li> */}
+          <Cart  cartItems={getCartItems()}/>
         </ul>
-        {/* <div className="search-box"> */}
         <a href="#" className="text-dark ms-auto pe-auto" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample"><SearchIcon className="mt-2" /></a>
         <div className="input-style">
           <div class="collapse collapse-horizontal" id="collapseWidthExample">

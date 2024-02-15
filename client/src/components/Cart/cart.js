@@ -5,6 +5,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Image from 'react-bootstrap/Image';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from "react-router-dom";
+import { useCart } from '../../context/cart.context'
 import ApiService from '../../services/api.service';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
@@ -12,6 +13,7 @@ const Cart = () => {
   const [cartProducts, setCartProducts] = useState([]);
   const [show, setShow] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const { getCartItems, updateCart } = useCart(); // Obtener el estado updateCart del contexto
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -19,11 +21,9 @@ const Cart = () => {
   const removeFromCart = async (productId) => {
     try {
       await ApiService.removeProductFromCart(productId);
-      // Refrescar la lista de productos después de la eliminación
       const updatedCartProducts = await ApiService.getCartProducts();
       setCartProducts(updatedCartProducts);
 
-      // Recalcular la suma total de precios
       const total = updatedCartProducts.reduce((acc, cartProduct) => acc + cartProduct.price * cartProduct.quantity, 0);
       setTotalPrice(total);
     } catch (error) {
@@ -31,13 +31,12 @@ const Cart = () => {
     }
   };
 
-
   useEffect(() => {
     const fetchCartProducts = async () => {
       try {
         const cartProductsData = await ApiService.getCartProducts();
         setCartProducts(cartProductsData);
-        // Calcular la suma total de precios
+
         const total = cartProductsData.reduce((acc, cartProduct) => acc + cartProduct.price * cartProduct.quantity, 0);
         setTotalPrice(total);
       } catch (error) {
@@ -46,11 +45,7 @@ const Cart = () => {
     };
 
     fetchCartProducts();
-  }, []);
-  // useEffect(() => {
-  //   const total = cartProducts.reduce((acc, cartProduct) => acc + cartProduct.price * cartProduct.quantity, 0);
-  //   setTotalPrice(total);
-  // }, [cartProducts]);
+  }, [updateCart]);
 
   return (
     <>

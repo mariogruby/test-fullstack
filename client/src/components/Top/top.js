@@ -1,66 +1,102 @@
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import ApiService from '../../services/api.service';
 import './styles.css'
 
+class ShowProductById extends Component {
+  constructor() {
+    super();
+    this.state = {
+      product: null,
+      loading: true,
+    };
+  }
 
-const addToCart = async (productId, title, price) => {
+  async componentDidMount() {
     try {
-        await ApiService.addToCart(productId, title, price);
-        console.log('Producto agregado al carrito exitosamente');
-    } catch (error) {
-        console.error('Error al agregar producto al carrito:', error);
-    }
-};
+      const productId = 8242953879830;
+      const fetchedProduct = await ApiService.fetchProductById(productId);
 
-const ProductSection = () => {
-    
-    return (
-        // <div className="bb-g container mt-5">
-        <section className="container py-5">
-        <div className="container px-4 px-lg-5 my-5">
-          <div className="row gx-4 gx-lg-5 align-items-center">
-            <div className="col-md-6 text-start"> {/* Add text-start class here */}
-              <img
-                className="card-img-top mb-5 mb-md-0"
-                src="https://cdn.shopify.com/s/files/1/0756/0996/4822/products/Main.jpg?v=1683140446"
-                alt="..."
-              />
-            </div>
-            <div className="col-md-6 text-start"> {/* Add text-start class here */}
-              <small className="mb-1">OUR SIGNATURE TOP BOARD </small>
-              <h1 className="display-5 fw-bolder">The 3D Modeled Snowboard</h1>
-              <div className="fs-5 mb-5">
-                <span className="text-decoration-line-through">$900.00</span>
-                <span> $885.95</span>
-                <div></div>
-                <small className="mb-1 taxes">Tax included. Shipping calculated at checkout.</small>
-              </div>
-              <p className="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi.
-                Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam
-                minima ea iste laborum vero?
-              </p>
-              <div className="d-flex">
-                <input
-                  id="inputQuantity"
-                  className="form-control text-center me-3"
-                  type="number"
-                  value="1"
-                  style={{ maxWidth: '3rem' }}
-                />
-                <button className="btn btn-outline-dark flex-shrink-0" type="button">
-                  <i className="bi bi-cart-fill me-1" />
-                  Add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    //    </div>
-      
-    );
+      this.setState({
+        product: fetchedProduct,
+        loading: false,
+      });
+    } catch (error) {
+      console.error('Error fetching product:', error.message);
+      this.setState({
+        loading: false,
+      });
+    }
+  }
+
+  addToCart = async (productId, title, price, image) => {
+    try {
+      await ApiService.addToCart(productId, title, price, image);
+      console.log('Producto agregado al carrito exitosamente');
+    } catch (error) {
+      console.error('Error al agregar producto al carrito:', error);
+    }
   };
-  
-  
-  export default ProductSection;
+
+
+  render() {
+    const { loading, product } = this.state;
+
+    return (
+      <div>
+        {loading ? (
+          <p>Cargando...</p>
+        ) : (
+          <section className="container py-5">
+            <div className="container px-4 px-lg-5 my-5">
+              <div className="row gx-4 gx-lg-5 align-items-center">
+                <div className="col-md-6 text-start"> 
+                {/* Add text-start class here */}
+                {product.image ? (
+                  <img
+                    className="card-img-top mb-5 mb-md-0"
+                    src={product.image.src}
+                    alt={product.title}
+                  />
+                ) : (
+                  <div>No hay imagen disponible</div>
+                )}
+                </div>
+                <div className="col-md-6 text-start"> {/* Add text-start class here */}
+                  <small className="mb-1">OUR SIGNATURE TOP BOARD </small>
+                  <h1 className="display-5 fw-bolder">{product.title}</h1>
+                  <div className="fs-5 mb-5">
+                    <span className="text-decoration-line-through">$900.00</span>
+                    <span> ${product.variants[0].price}</span>
+                    <div></div>
+                    <small className="mb-1 taxes">Tax included. Shipping calculated at checkout.</small>
+                  </div>
+                  <p className="lead">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi.
+                    Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam
+                    minima ea iste laborum vero?
+                  </p>
+                  <div className="d-flex">
+                    <input
+                      id="inputQuantity"
+                      className="form-control text-center me-3"
+                      type="number"
+                      value="1"
+                      style={{ maxWidth: '3rem' }}
+                    />
+                    <button className="btn btn-outline-dark flex-shrink-0" type="button"
+                    onClick={()=> this.addToCart(product.id, product.title, product.variants[0].price, product.image.src)}>
+                      <i className="bi bi-cart-fill me-1" />
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+      </div>
+    );
+  }
+}
+
+export default ShowProductById;
