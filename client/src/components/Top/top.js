@@ -1,45 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import ApiService from '../../services/api.service';
-import './styles.css'
+import { useCart } from '../../context/cart.context';
+import './styles.css';
 
-class ShowProductById extends Component {
-  constructor() {
-    super();
-    this.state = {
-      product: null,
-      loading: true,
+const ShowProductById = () => {
+  const { addToCart } = useCart();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const productId = 8242953879830;
+        const fetchedProduct = await ApiService.fetchProductById(productId);
+
+        setProduct(fetchedProduct);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching product:', error.message);
+        setLoading(false);
+      }
     };
-  }
 
-  async componentDidMount() {
-    try {
-      const productId = 8242953879830;
-      const fetchedProduct = await ApiService.fetchProductById(productId);
+    fetchProduct();
+  }, []);
 
-      this.setState({
-        product: fetchedProduct,
-        loading: false,
-      });
-    } catch (error) {
-      console.error('Error fetching product:', error.message);
-      this.setState({
-        loading: false,
-      });
-    }
-  }
-
-  addToCart = async (productId, title, price, image) => {
+  const addToCartHandler = async (productId, title, price, image) => {
     try {
       await ApiService.addToCart(productId, title, price, image);
+      addToCart({ id: productId, title, price, image });
       console.log('Producto agregado al carrito exitosamente');
     } catch (error) {
       console.error('Error al agregar producto al carrito:', error);
     }
   };
-
-
-  render() {
-    const { loading, product } = this.state;
 
     return (
       <div>
@@ -84,7 +78,7 @@ class ShowProductById extends Component {
                       style={{ maxWidth: '3rem' }}
                     />
                     <button className="btn btn-outline-dark flex-shrink-0" type="button"
-                    onClick={()=> this.addToCart(product.id, product.title, product.variants[0].price, product.image.src)}>
+                    onClick={()=>addToCartHandler(product.id, product.title, product.variants[0].price, product.image.src)}>
                       <i className="bi bi-cart-fill me-1" />
                       Add to cart
                     </button>
@@ -97,6 +91,6 @@ class ShowProductById extends Component {
       </div>
     );
   }
-}
+
 
 export default ShowProductById;

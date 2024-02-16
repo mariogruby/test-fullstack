@@ -2,9 +2,7 @@ import './styles-collections.css';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ApiService from '../../services/api.service';
-// import ApiCollections from './api-collections';
 import Image from 'react-bootstrap/Image';
-import ListCollections from '../../components/List/list-collections';
 import Slider from 'react-slick'; // Importa el componente Slider de react-slick
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -40,53 +38,45 @@ const SliderComponent = () => {
         }
     };
 
-    //   const handleSearch = (searchQuery) => {
-    //     setSearchQuery(searchQuery);
-    //     if (searchQuery.trim() === '') {
-    //       setFilteredProducts(products);
-    //     } else {
-    //       const filtered = products.filter(
-    //         (product) =>
-    //           product.title.toLowerCase().includes(searchQuery.toLowerCase())
-    //       );
-    //       setFilteredProducts(filtered);
-    //     }
-    //   };
     const PrevArrow = ({ onClick }) =>
         <button type="button" className="btn btn-light custom-arrow-prev" onClick={onClick}><ArrowBackRoundedIcon className="text-dark"/></button>;
     const NextArrow = ({ onClick }) =>
         <button type="button" className="btn btn-light custom-arrow-next" onClick={onClick}><ArrowForwardRoundedIcon className="text-dark"/></button>;
 
     // Configuración del slider
-    const sliderSettings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        prevArrow: <PrevArrow />,
-        nextArrow: <NextArrow />,
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                },
-            },
-        ],
-    };
+const sliderSettings = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  prevArrow: <PrevArrow />,
+  nextArrow: <NextArrow />,
+  responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+      },
+    },
+  ],
+};
+
 
     return (
         <>
-            {/* <NavbarPage handleSearch={handleSearch} /> */}
-            {/* {searchQuery.trim() === '' && <Overview />} */}
-            {/* <Container> */}
             <div className="b-g">
                 <h1 className="title py-5">Snowboards Collections</h1>
                 <Slider className="mb-5" {...sliderSettings}>
@@ -103,9 +93,7 @@ const SliderComponent = () => {
                                         />
                                     ) : (
                                         <div>No hay imagen disponible</div>
-
                                     )}
-
                                 </div>
                             </Link>
                             <a href={`/products/${product.id}`}
@@ -121,14 +109,25 @@ const SliderComponent = () => {
                                 Agregar al Carrito
                             </button> */}
                         </div>
-
                     ))}
                 </Slider>
                 <a href="/products/snowboards" type="button" className="btncollection btn btn-light mt-2 mb-5">View all</a>
             </div> 
-            {/* </Container> */}
         </>
     );
 };
 
 export default SliderComponent;
+
+    //   const handleSearch = (searchQuery) => {
+    //     setSearchQuery(searchQuery);
+    //     if (searchQuery.trim() === '') {
+    //       setFilteredProducts(products);
+    //     } else {
+    //       const filtered = products.filter(
+    //         (product) =>
+    //           product.title.toLowerCase().includes(searchQuery.toLowerCase())
+    //       );
+    //       setFilteredProducts(filtered);
+    //     }
+    //   };

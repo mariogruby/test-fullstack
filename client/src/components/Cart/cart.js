@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import './cart-styles.css';
 import Nav from 'react-bootstrap/Nav';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Image from 'react-bootstrap/Image';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from "react-router-dom";
+import { AuthContext } from '../../context/auth.context';
 import { useCart } from '../../context/cart.context'
 import ApiService from '../../services/api.service';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -13,7 +14,8 @@ const Cart = () => {
   const [cartProducts, setCartProducts] = useState([]);
   const [show, setShow] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
-  const { getCartItems, updateCart } = useCart(); // Obtener el estado updateCart del contexto
+  const { getCartItems, updateCart } = useCart();
+  const { isLoggedIn } = useContext(AuthContext); // Obtener el estado updateCart del contexto
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -34,18 +36,24 @@ const Cart = () => {
   useEffect(() => {
     const fetchCartProducts = async () => {
       try {
-        const cartProductsData = await ApiService.getCartProducts();
-        setCartProducts(cartProductsData);
+        if (isLoggedIn) {
+          const cartProductsData = await ApiService.getCartProducts();
+          setCartProducts(cartProductsData);
 
-        const total = cartProductsData.reduce((acc, cartProduct) => acc + cartProduct.price * cartProduct.quantity, 0);
-        setTotalPrice(total);
+          const total = cartProductsData.reduce((acc, cartProduct) => acc + cartProduct.price * cartProduct.quantity, 0);
+          setTotalPrice(total);
+        } else {
+          // Si el usuario no está autenticado, establece el carrito como vacío
+          setCartProducts([]);
+          setTotalPrice(0);
+        }
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchCartProducts();
-  }, [updateCart]);
+  }, [updateCart, isLoggedIn]);
 
   return (
     <>

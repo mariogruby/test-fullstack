@@ -22,9 +22,12 @@ const NavbarPage = () => {
   };
   // Funcion para hacer logout 
   const { logOutUser } = useContext(AuthContext);
+  const { clearCart } = useCart();
   const navigate = useNavigate();
+
   function logOutHandler() {
     logOutUser()
+    clearCart()
     console.log(logOutUser, "user logged out")
     navigate("/");
   }
