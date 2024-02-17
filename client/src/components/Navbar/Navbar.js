@@ -33,7 +33,7 @@ const NavbarPage = () => {
   }
 
   return (
-    <nav className="navbar  sticky-top navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar sticky-top navbar-expand-lg">
     <div className="container-fluid">
       <a className="navbar-brand" href="/">SnowWorld</a>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ApiService from '../../services/api.service';
+import StarterPack from '../../components/Starter/starter-pack';
 import ApiCollections from '../collectionsPage/api-collections';
 import authService from '../../services/auth.service';
 import SliderCollections from '../../components/Slider/slider-collections'
@@ -90,6 +91,7 @@ const LandingPage = () => {
         <ListCollections />
         <SliderCollections />
         <TopSection />
+        <StarterPack />
         <Footer />
     </>
   );

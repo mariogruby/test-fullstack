@@ -1,0 +1,7 @@
+.tamaño-de-imagen{
+    width: 250px;
+    height: 250px;
+}
+.grid{
+    display: grid;
+}

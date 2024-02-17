@@ -1,7 +1,18 @@
-.bb-g {
-    background-color: aqua;
+#color-div{
+    background-color: #eeeeee;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 .taxes {
     font-size: 13px;
     color: gray;
+}
+.padre{
+    margin: 20px;
+}
+.card-img-top {
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }

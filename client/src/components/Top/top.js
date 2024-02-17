@@ -36,12 +36,12 @@ const ShowProductById = () => {
   };
 
     return (
-      <div>
+      <div className="padre">
         {loading ? (
           <p>Cargando...</p>
         ) : (
-          <section className="container py-5">
-            <div className="container px-4 px-lg-5 my-5">
+          <section className="container py-5" id="color-div">
+            <div className="container px-4 px-lg-5">
               <div className="row gx-4 gx-lg-5 align-items-center">
                 <div className="col-md-6 text-start"> 
                 {/* Add text-start class here */}
