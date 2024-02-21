@@ -57,11 +57,11 @@ const Cart = () => {
 
   return (
     <>
-      <a href="#" onClick={handleShow} className="nav-link nav-underline text-dark">
+      <Link onClick={handleShow} className="nav-link nav-underline text-dark">
         <Nav.Item variant="primary">
           <ShoppingCartOutlinedIcon />
         </Nav.Item>
-      </a>
+      </Link>
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Offcanvas</Offcanvas.Title>

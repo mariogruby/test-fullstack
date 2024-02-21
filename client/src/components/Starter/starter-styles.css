@@ -1,7 +1,10 @@
 .tamaño-de-imagen{
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
+    justify-content: center;
 }
-.grid{
-    display: grid;
+.back-grnd {
+    background:  rgb(23,115,176);
+    background: radial-gradient(circle, rgb(39, 154, 241, 1) 0%, rgba(10, 35, 66, 1) 100%);
+    overflow-x: hidden;
 }
